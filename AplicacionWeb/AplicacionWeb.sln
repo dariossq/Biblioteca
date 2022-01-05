@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebVista", "WebVista\WebVis
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{AD0A005F-69BF-45E2-B7E8-1FA5693E5B79}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ropository", "Ropository\Ropository.csproj", "{2412D4D8-9903-4F14-8975-9462A12A2548}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{AD0A005F-69BF-45E2-B7E8-1FA5693E5B79}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD0A005F-69BF-45E2-B7E8-1FA5693E5B79}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD0A005F-69BF-45E2-B7E8-1FA5693E5B79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2412D4D8-9903-4F14-8975-9462A12A2548}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2412D4D8-9903-4F14-8975-9462A12A2548}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2412D4D8-9903-4F14-8975-9462A12A2548}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2412D4D8-9903-4F14-8975-9462A12A2548}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

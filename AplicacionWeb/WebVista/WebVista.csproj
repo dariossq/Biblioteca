@@ -5370,6 +5370,10 @@
       <Project>{ad0a005f-69bf-45e2-b7e8-1fa5693e5b79}</Project>
       <Name>Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Ropository\Ropository.csproj">
+      <Project>{2412D4D8-9903-4F14-8975-9462A12A2548}</Project>
+      <Name>Ropository</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
