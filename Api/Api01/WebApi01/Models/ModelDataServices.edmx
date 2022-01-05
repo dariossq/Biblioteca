@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AUTOR">
+          <Key>
+            <PropertyRef Name="ID_AUTOR" />
+          </Key>
+          <Property Name="ID_AUTOR" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE_COMPLETO" Type="varchar2" MaxLength="500" />
+          <Property Name="FECHA_NACIMIENTO" Type="date" />
+          <Property Name="CIUDAD_PROCEDENCIA" Type="varchar2" MaxLength="100" />
+          <Property Name="CORREOELECTRONICO" Type="varchar2" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="LIBRO">
+          <Key>
+            <PropertyRef Name="ID_LIBRO" />
+          </Key>
+          <Property Name="ID_LIBRO" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="TITULO" Type="varchar2" MaxLength="200" Nullable="false" />
+          <Property Name="ANO" Type="date" />
+          <Property Name="GENERO" Type="varchar2" MaxLength="20" />
+          <Property Name="NUMERO_PAGINAS" Type="number" Precision="38" Scale="0" />
+          <Property Name="ID_AUTOR" Type="number" Precision="38" Scale="0" />
+        </EntityType>
+        <Association Name="XXXXXX">
+          <End Role="AUTOR" Type="Self.AUTOR" Multiplicity="0..1" />
+          <End Role="LIBRO" Type="Self.LIBRO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AUTOR">
+              <PropertyRef Name="ID_AUTOR" />
+            </Principal>
+            <Dependent Role="LIBRO">
+              <PropertyRef Name="ID_AUTOR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="AUTOR" EntityType="Self.AUTOR" Schema="BIBLIOTECA" store:Type="Tables" />
+          <EntitySet Name="LIBRO" EntityType="Self.LIBRO" Schema="BIBLIOTECA" store:Type="Tables" />
+          <AssociationSet Name="XXXXXX" Association="Self.XXXXXX">
+            <End Role="AUTOR" EntitySet="AUTOR" />
+            <End Role="LIBRO" EntitySet="LIBRO" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AUTOR">
+          <Key>
+            <PropertyRef Name="ID_AUTOR" />
+          </Key>
+          <Property Name="ID_AUTOR" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE_COMPLETO" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="FECHA_NACIMIENTO" Type="DateTime" />
+          <Property Name="CIUDAD_PROCEDENCIA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CORREOELECTRONICO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="LIBROes" Relationship="Self.XXXXXX" FromRole="AUTOR" ToRole="LIBRO" />
+        </EntityType>
+        <EntityType Name="LIBRO">
+          <Key>
+            <PropertyRef Name="ID_LIBRO" />
+          </Key>
+          <Property Name="ID_LIBRO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="TITULO" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ANO" Type="DateTime" />
+          <Property Name="GENERO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="NUMERO_PAGINAS" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="ID_AUTOR" Type="Decimal" Precision="38" Scale="0" />
+          <NavigationProperty Name="AUTOR" Relationship="Self.XXXXXX" FromRole="LIBRO" ToRole="AUTOR" />
+        </EntityType>
+        <Association Name="XXXXXX">
+          <End Role="AUTOR" Type="Self.AUTOR" Multiplicity="0..1" />
+          <End Role="LIBRO" Type="Self.LIBRO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AUTOR">
+              <PropertyRef Name="ID_AUTOR" />
+            </Principal>
+            <Dependent Role="LIBRO">
+              <PropertyRef Name="ID_AUTOR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AUTORs" EntityType="Self.AUTOR" />
+          <EntitySet Name="LIBROes" EntityType="Self.LIBRO" />
+          <AssociationSet Name="XXXXXX" Association="Self.XXXXXX">
+            <End Role="AUTOR" EntitySet="AUTORs" />
+            <End Role="LIBRO" EntitySet="LIBROes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="AUTORs">
+            <EntityTypeMapping TypeName="Model.AUTOR">
+              <MappingFragment StoreEntitySet="AUTOR">
+                <ScalarProperty Name="ID_AUTOR" ColumnName="ID_AUTOR" />
+                <ScalarProperty Name="NOMBRE_COMPLETO" ColumnName="NOMBRE_COMPLETO" />
+                <ScalarProperty Name="FECHA_NACIMIENTO" ColumnName="FECHA_NACIMIENTO" />
+                <ScalarProperty Name="CIUDAD_PROCEDENCIA" ColumnName="CIUDAD_PROCEDENCIA" />
+                <ScalarProperty Name="CORREOELECTRONICO" ColumnName="CORREOELECTRONICO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LIBROes">
+            <EntityTypeMapping TypeName="Model.LIBRO">
+              <MappingFragment StoreEntitySet="LIBRO">
+                <ScalarProperty Name="ID_LIBRO" ColumnName="ID_LIBRO" />
+                <ScalarProperty Name="TITULO" ColumnName="TITULO" />
+                <ScalarProperty Name="ANO" ColumnName="ANO" />
+                <ScalarProperty Name="GENERO" ColumnName="GENERO" />
+                <ScalarProperty Name="NUMERO_PAGINAS" ColumnName="NUMERO_PAGINAS" />
+                <ScalarProperty Name="ID_AUTOR" ColumnName="ID_AUTOR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

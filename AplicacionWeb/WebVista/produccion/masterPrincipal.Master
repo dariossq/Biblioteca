@@ -1,0 +1,245 @@
+﻿<%@ Master  Language="C#" AutoEventWireup="true" CodeBehind="masterPrincipal.Master.cs" Inherits="WebVista.produccion.masterPrincipal" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxtoolkit" %>
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head id="Head1" runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Viajes</title>
+  
+    <!-- Bootstrap -->
+    <link href="vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- jQuery custom content scroller -->
+    <link href="vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet" />
+
+    <!-- Custom Theme Style -->
+    <link href="build/css/custom.min.css" rel="stylesheet">
+
+
+    <%--//////////////////////////////////////////////////////////////////////////////////////////////////////////--%>
+ 
+
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+   <%-- <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>--%>
+
+
+
+    <link href="../produccion/plugins/bootstrap/css/Alert.css" rel="stylesheet" />
+    
+    <link rel="icon" href="images/favicon.ico" type="image/ico" />
+
+    <style type="text/css">
+        .messagealert {
+            width: inherit;
+            position: fixed;
+            top: 0px;
+            z-index: 10;
+            padding: 0;
+            font-size: 50px;
+        }
+    </style>
+
+    <script type="text/javascript">
+        function ShowMessage(message, messagetype) {
+            var cssclass;
+            switch (messagetype) {
+                case 'Success':
+                    cssclass = 'alert-success'
+                    break;
+                case 'Error':
+                    cssclass = 'alert-danger'
+                    break;
+                case 'Warning':
+                    cssclass = 'alert-warning'
+                    break;
+                default:
+                    cssclass = 'alert-info'
+            }
+            $('#alert_container').append('<div id="alert_div" style="margin: 0 0.5%; -webkit-box-shadow: 3px 4px 6px #999;" class="alert fade in ' + cssclass + '"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>' + messagetype + '!</strong> <span>' + message + '</span></div>');
+        }
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            window.setTimeout(function () {
+                $(".alert").fadeTo(2000, 0).slideUp(2000, function () {
+                    $(this).remove();
+                });
+            }, 2000);
+
+        });
+    </script>
+    <%--//////////////////////////////////////////////////////////////////////////////////////////////////////////--%>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+
+<body class="nav-md">  
+
+    <div class="container body">
+        <div class="main_container">
+            <div class="col-md-3 left_col menu_fixed">
+                <div class="left_col scroll-view">
+                    <div class="navbar nav_title" style="border: 0;">
+                        <a href="../Principal/WebPrincipal.aspx#" class="site_title"><i class="fa fa-globe"></i><span>Viajes!</span></a>
+                    </div>                
+
+                    <div class="clearfix"></div>
+
+                    <!-- menu profile quick info lado izquierdo superior-->
+                    <div class="profile clearfix">
+                        <div class="profile_pic">
+                            <img src="../../../images/favicon.png" alt="..." class="img-circle profile_img">
+                        </div>
+                        <div class="profile_info">
+                           
+                            <h2>Viajes
+                            </h2>
+                             <span>_________</span>
+                        </div>
+                    </div>
+                    <!-- /menu profile quick info -->
+
+                    <br />
+
+                    <!-- Menu princial -->
+                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                        <div class="menu_section">
+                            <h3>Menú Principal</h3>
+                            <ul class="nav side-menu">
+
+                                <!-- Menu Viajes -->
+                                <li><a runat="server" id="zmenuViajes"><i class="fa fa-home"></i>Viaje <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                                <li class="sub_menu" runat="server" id="zmenuViajeConsulta"><a href="../ConsultaViaje/WebViaje.aspx">Viajes por empleado</a>
+                                                </li>
+                                      </ul>
+                                </li>
+                                <!--FIN Menu Viajes -->                          
+                            </ul>
+                        </div>
+                    </div>
+                   </div>
+            </div>
+
+            <!-- top navigation parte superior -->
+            <div class="top_nav">
+                <div class="nav_menu">
+                    <nav>
+                        <div class="nav toggle">  <!-- top navigation parte superior IZQUIERDA -->
+                            <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                        </div>
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="">
+                                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                    <img src="../../../images/media.jpg" alt="">
+                                    <asp:Label ID="LblActual" runat="server" Text=""></asp:Label>
+                                    <span class=" fa fa-angle-down"></span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-usermenu pull-right">
+                                   
+                                    <li><a href="../Login_v1/login_v2.aspx"><i class="fa fa-sign-out pull-right"></i>Cerrar sesión</a></li>
+                                </ul>
+                            </li>
+                          
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            
+              <!-- Fin top navigation parte superior -->
+
+            <!-- page content -->
+            <form id="formPrincipal" runat="server">
+                <%--<asp:HiddenField ID="HfRol" runat="server" />
+                <asp:HiddenField ID="HfContrasenna" runat="server" />
+                <asp:HiddenField ID="HfUsuario" runat="server" />--%>
+                <asp:ScriptManager ID="ScriptManager2" runat="server" EnableScriptGlobalization="true"></asp:ScriptManager>
+
+                <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                    <ContentTemplate>
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
+                            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                            </asp:ContentPlaceHolder>
+                        </asp:ContentPlaceHolder>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+            </form>
+            <!-- /page content -->
+
+            <!-- footer content -->
+            <footer>
+                <div class="pull-right">
+                    También puedes visitar... <a href="https://www.viajes.com/">Viajes.com</a>
+                </div>
+                <div class="clearfix"></div>
+            </footer>
+            <!-- /footer content -->
+       
+    </div>
+    </div>
+    <!-- jQuery -->
+
+    <!-- jQuery -->
+    <script src="../../../vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="../../../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="../../../vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="../../../vendors/nprogress/nprogress.js"></script>
+    <!-- jQuery custom content scroller -->
+    <script src="../../../vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script src="../../../build/js/custom.min.js"></script>
+
+    <!-- Initialize datetimepicker -->
+    <script>
+        $('#myDatepicker').datetimepicker();
+
+        $('#myDatepicker2').datetimepicker({
+            format: 'DD.MM.YYYY'
+        });
+
+        $('#myDatepicker3').datetimepicker({
+            format: 'hh:mm A'
+        });
+
+        $('#myDatepicker4').datetimepicker({
+            ignoreReadonly: true,
+            allowInputToggle: true
+        });
+
+        $('#datetimepicker6').datetimepicker();
+
+        $('#datetimepicker7').datetimepicker({
+            useCurrent: false
+        });
+
+        $("#datetimepicker6").on("dp.change", function (e) {
+            $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+        });
+
+        $("#datetimepicker7").on("dp.change", function (e) {
+            $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+        });
+    </script>
+</body>
+</html>
