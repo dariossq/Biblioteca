@@ -7,119 +7,128 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace WebVista.produccion
+namespace WebVista.produccion.produccion.Administracion.Autor
 {
 
 
-    public partial class masterPrincipal
+    public partial class WebAutor
     {
 
         /// <summary>
-        /// Control Head1.
+        /// Control HfAutorId.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlHead Head1;
+        protected global::System.Web.UI.WebControls.HiddenField HfAutorId;
 
         /// <summary>
-        /// Control head.
+        /// Control UpdatePanel2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
+        protected global::System.Web.UI.UpdatePanel UpdatePanel2;
 
         /// <summary>
-        /// Control A1.
+        /// Control TxtNombre.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor A1;
+        protected global::System.Web.UI.WebControls.TextBox TxtNombre;
 
         /// <summary>
-        /// Control Li1.
+        /// Control TxtFechaNacimiento.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Li1;
+        protected global::System.Web.UI.WebControls.TextBox TxtFechaNacimiento;
 
         /// <summary>
-        /// Control zmenuBiblioteca.
+        /// Control CalendarExtender1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor zmenuBiblioteca;
+        protected global::AjaxControlToolkit.CalendarExtender CalendarExtender1;
 
         /// <summary>
-        /// Control zmenuViajeConsulta.
+        /// Control RequiredFieldValidator5.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl zmenuViajeConsulta;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator5;
 
         /// <summary>
-        /// Control LblActual.
+        /// Control TxtCiudad.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LblActual;
+        protected global::System.Web.UI.WebControls.TextBox TxtCiudad;
 
         /// <summary>
-        /// Control formPrincipal.
+        /// Control TxtMail.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm formPrincipal;
+        protected global::System.Web.UI.WebControls.TextBox TxtMail;
 
         /// <summary>
-        /// Control ScriptManager2.
+        /// Control BtnRegistrar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.ScriptManager ScriptManager2;
+        protected global::System.Web.UI.WebControls.Button BtnRegistrar;
 
         /// <summary>
-        /// Control UpdatePanel1.
+        /// Control BtnActualiza.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+        protected global::System.Web.UI.WebControls.Button BtnActualiza;
 
         /// <summary>
-        /// Control ContentPlaceHolder2.
+        /// Control BtnCancelar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolder2;
+        protected global::System.Web.UI.WebControls.Button BtnCancelar;
 
         /// <summary>
-        /// Control ContentPlaceHolder1.
+        /// Control BtnEliminar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolder1;
+        protected global::System.Web.UI.WebControls.Button BtnEliminar;
+
+        /// <summary>
+        /// Control GvDatos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GvDatos;
     }
 }

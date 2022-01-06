@@ -13,7 +13,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Viajes</title>
+    <title>Biblioteca</title>
   
     <!-- Bootstrap -->
     <link href="vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -96,7 +96,7 @@
             <div class="col-md-3 left_col menu_fixed">
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0;">
-                        <a href="../Principal/WebPrincipal.aspx#" class="site_title"><i class="fa fa-globe"></i><span>Viajes!</span></a>
+                        <a href="../Principal/WebPrincipal.aspx#" class="site_title"><i class="fa fa-globe"></i><span>Biblioteca!</span></a>
                     </div>                
 
                     <div class="clearfix"></div>
@@ -108,7 +108,7 @@
                         </div>
                         <div class="profile_info">
                            
-                            <h2>Viajes
+                            <h2>Biblioteca
                             </h2>
                              <span>_________</span>
                         </div>
@@ -123,14 +123,23 @@
                             <h3>Menú Principal</h3>
                             <ul class="nav side-menu">
 
-                                <!-- Menu Viajes -->
-                                <li><a runat="server" id="zmenuViajes"><i class="fa fa-home"></i>Viaje <span class="fa fa-chevron-down"></span></a>
+                                  <!-- Menu Autor -->
+                                <li><a runat="server" id="A1"><i class="fa fa-home"></i>Gestión de Autores <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                                <li class="sub_menu" runat="server" id="zmenuViajeConsulta"><a href="../ConsultaViaje/WebViaje.aspx">Viajes por empleado</a>
+                                                <li class="sub_menu" runat="server" id="Li1"><a href="../Autor/WebAutor.aspx">Gestion de Autores</a>
                                                 </li>
                                       </ul>
                                 </li>
-                                <!--FIN Menu Viajes -->                          
+                                <!--FIN Menu Biblioteca -->    
+
+                                <!-- Menu Biblioteca -->
+                                <li><a runat="server" id="zmenuBiblioteca"><i class="fa fa-home"></i>Viaje <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                                <li class="sub_menu" runat="server" id="zmenuViajeConsulta"><a href="../ConsultaViaje/WebViaje.aspx">Biblioteca por empleado</a>
+                                                </li>
+                                      </ul>
+                                </li>
+                                <!--FIN Menu Biblioteca -->                          
                             </ul>
                         </div>
                     </div>
@@ -186,7 +195,7 @@
             <!-- footer content -->
             <footer>
                 <div class="pull-right">
-                    También puedes visitar... <a href="https://www.viajes.com/">Viajes.com</a>
+                    También puedes visitar... <a href="https://www.Biblioteca.com/">Biblioteca.com</a>
                 </div>
                 <div class="clearfix"></div>
             </footer>

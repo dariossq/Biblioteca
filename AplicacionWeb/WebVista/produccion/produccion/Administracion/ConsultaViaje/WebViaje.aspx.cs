@@ -64,7 +64,7 @@ namespace WebVista.produccion.produccion.Administracion.ConsultaViaje
         {
             DdlPersona.DataSource = null;
             DdlPersona.Items.Add("");
-            DdlPersona.DataSource = await Personas.ListarEmpleados("Autores");
+            DdlPersona.DataSource = await Personas.ListarAutores("Autores");
             DdlPersona.DataTextField = "NOMBRE_COMPLETO";
             DdlPersona.DataValueField = "ID_AUTOR";
             DdlPersona.DataBind();
