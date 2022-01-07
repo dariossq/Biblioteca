@@ -1,7 +1,6 @@
 ﻿
 using Microsoft.Graph;
 using Newtonsoft.Json;
-using ReRopository.AutorRepository;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -11,17 +10,17 @@ using System.Net.Http;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-//using System.Text.Json.Net;
 
 
-namespace WebVista.produccion.produccion.Administracion.Autor
+namespace WebVista.produccion.produccion.Administracion.Libro
 {
-    public partial class WebAutor : System.Web.UI.Page
+    public partial class WebLibro : System.Web.UI.Page
     {
         Infrastructure.Autor.Autor autor = new Infrastructure.Autor.Autor();
         DataSet Ds = new DataSet();
         dynamic Biblioteca = new System.Dynamic.ExpandoObject();
-        string url = ConfigurationManager.AppSettings["ApiAutor"];
+        string url = ConfigurationManager.AppSettings["ApiLibro"];
+        string urlAutor = ConfigurationManager.AppSettings["ApiAutor"];
 
         public enum MessageType { Mensaje, Error, Informacion, Advertencia };
 
@@ -36,8 +35,9 @@ namespace WebVista.produccion.produccion.Administracion.Autor
             { return; }
             else
             {
-                CargarAutores(url);
                 CargarAutor();
+                CargarLibros();
+               
             }
         }
 
@@ -47,7 +47,7 @@ namespace WebVista.produccion.produccion.Administracion.Autor
             {
                 DdlAutor.DataSource = null;
                 DdlAutor.Items.Add("");
-                DdlAutor.DataSource = await autor.ListarAutores(url);
+                DdlAutor.DataSource = await autor.ListarAutores(urlAutor);
                 DdlAutor.DataTextField = "NOMBRE_COMPLETO";
                 DdlAutor.DataValueField = "ID_AUTOR";
                 DdlAutor.DataBind();
@@ -60,16 +60,17 @@ namespace WebVista.produccion.produccion.Administracion.Autor
         }
 
         /// <summary>
-        /// Méetodo para listar todos los autores registrados
+        /// Méetodo para listar todos los libros registrados
         /// </summary>
-        private async void CargarAutores(string urlEntrada)
+        private async void CargarLibros()
         {
             try
             {
-                object datos = await autor.getAutores(urlEntrada);
-                var definicion = new { ID_AUTOR = 0.0, NOMBRE_COMPLETO = "", FECHA_NACIMIENTO = "", CIUDAD_PROCEDENCIA = "", CORREOELECTRONICO = "" };
+                string datos = await autor.getAutores(url);
+                var definicion = new { ID_LIBRO = 0.0, TITULO = "", ANO = "", GENERO = "", NUMERO_PAGINAS = "" , ID_AUTOR = 0.0 };
+                //var definicion = new CargarDefinicion();
                 var listaDefinicion = new[] { definicion };
-                var productos = JsonConvert.DeserializeObject(Convert.ToString(datos));
+                var productos = JsonConvert.DeserializeObject(datos);
                 var listProductos = JsonConvert.DeserializeAnonymousType(Convert.ToString(productos), listaDefinicion);
                 GvDatos.DataSource = listProductos;
                 GvDatos.DataBind();
@@ -79,89 +80,69 @@ namespace WebVista.produccion.produccion.Administracion.Autor
                     ShowMessage("No hay datos con la información suministrada. ", MessageType.Informacion);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw;
             }
         }
-
-        //private object CargarDefinicion()
-        //{
-        //    return  new { ID_AUTOR = 0.0, NOMBRE_COMPLETO = "", FECHA_NACIMIENTO = "", CIUDAD_PROCEDENCIA = "", CORREOELECTRONICO = "" };
-
-        //}
-
-        private async void CargarAutore(string urlEntrada)
-        {
-            try
-            {
-                urlEntrada = urlEntrada.Remove(urlEntrada.Length - 2);
-                string datos = "{'Table1': [ " +  await autor.getAutores(urlEntrada) + " ]}";
-                DataSet dataSet1 = JsonConvert.DeserializeObject<DataSet>(datos);
-                GvDatos.DataSource = dataSet1;
-                GvDatos.DataBind();
-
-                if (GvDatos.Rows.Count <= 0)
-                {
-                    ShowMessage("No hay datos con la información suministrada. ", MessageType.Informacion);
-                }
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
-        }
-
-
+               
         public dynamic Datos()
         {
             try
             {
+                if (string.IsNullOrEmpty(HfLibroId.Value))
+                {
+                    Biblioteca.ID_LIBRO = 0;
+                }
+                else
+                {
+                    Biblioteca.ID_LIBRO = Convert.ToInt32(HfLibroId.Value);
+                }
+
+                if (string.IsNullOrEmpty(TxtTitulo.Text))
+                {
+                    Biblioteca.TITULO = "";
+                }
+                else
+                {
+                    Biblioteca.TITULO = TxtTitulo.Text;
+                }
+
+                if (string.IsNullOrEmpty(TxtAnio.Text))
+                {
+                    Biblioteca.ANO = "";
+                }
+                else
+                {
+                    Biblioteca.ANO = "12/12/12";
+                }
+
+                if (string.IsNullOrEmpty(TxtGenro.Text))
+                {
+                    Biblioteca.GENERO = 0;
+                }
+                else
+                {
+                    Biblioteca.GENERO = TxtGenro.Text;
+                }
+
+                if (string.IsNullOrEmpty(TxtPaginas.Text))
+                {
+                    Biblioteca.NUMERO_PAGINAS = 0;
+                }
+                else
+                {
+                    Biblioteca.NUMERO_PAGINAS = TxtPaginas.Text;
+                }
+
                 if (string.IsNullOrEmpty(HfAutorId.Value))
                 {
-                    Biblioteca.ID_AUTOR = 0;
+                    Biblioteca.ID_AUTOR = 1;
                 }
                 else
                 {
-                    Biblioteca.ID_AUTOR = Convert.ToInt32(HfAutorId.Value);
-                }
-
-                if (string.IsNullOrEmpty(TxtNombre.Text))
-                {
-                    Biblioteca.NOMBRE_COMPLETO = 0;
-                }
-                else
-                {
-                    Biblioteca.NOMBRE_COMPLETO = TxtNombre.Text;
-                }
-
-                if (string.IsNullOrEmpty(TxtFechaNacimiento.Text))
-                {
-                    Biblioteca.FECHA_NACIMIENTO = 0;
-                }
-                else
-                {
-                    Biblioteca.FECHA_NACIMIENTO = TxtFechaNacimiento.Text;
-                }
-
-                if (string.IsNullOrEmpty(TxtCiudad.Text))
-                {
-                    Biblioteca.CIUDAD_PROCEDENCIA = 0;
-                }
-                else
-                {
-                    Biblioteca.CIUDAD_PROCEDENCIA = TxtCiudad.Text;
-                }
-
-                if (string.IsNullOrEmpty(TxtMail.Text))
-                {
-                    Biblioteca.CORREOELECTRONICO = 0;
-                }
-                else
-                {
-                    Biblioteca.CORREOELECTRONICO = TxtMail.Text;
+                    Biblioteca.ID_AUTOR = 1;
                 }
 
                 return Biblioteca;
@@ -185,7 +166,7 @@ namespace WebVista.produccion.produccion.Administracion.Autor
             else
             {
                 ShowMessage("Datos almacenados correctamente. ", MessageType.Informacion);
-                CargarAutores(url);
+                CargarLibros();
                 LimpiarTxt();
             }
         }
@@ -201,11 +182,12 @@ namespace WebVista.produccion.produccion.Administracion.Autor
         /// </summary>
         private void LimpiarTxt()
         {
+            HfLibroId.Value = "";
+            TxtTitulo.Text = "";
+            TxtAnio.Text = "";
+            TxtGenro.Text = "";
+            TxtPaginas.Text = "";
             HfAutorId.Value = "";
-            TxtCiudad.Text = "";
-            TxtFechaNacimiento.Text = "";
-            TxtNombre.Text = "";
-            TxtMail.Text = "";
             ActivarBotones();
         }
 
@@ -220,17 +202,21 @@ namespace WebVista.produccion.produccion.Administracion.Autor
         /// </summary>
         private void Seleccionar()
         {
+            
+            HfLibroId.Value = GvDatos.SelectedDataKey["ID_LIBRO"].ToString();
             HfAutorId.Value = GvDatos.SelectedDataKey["ID_AUTOR"].ToString();
-            TxtNombre.Text = GvDatos.SelectedDataKey["NOMBRE_COMPLETO"].ToString();
-            DateTime fechaExpedicion = Convert.ToDateTime(GvDatos.SelectedDataKey["FECHA_NACIMIENTO"].ToString());
-            TxtFechaNacimiento.Text = fechaExpedicion.ToString("dd/MM/yyyy");
-            TxtCiudad.Text = GvDatos.SelectedDataKey["CIUDAD_PROCEDENCIA"].ToString();
-            TxtMail.Text = GvDatos.SelectedDataKey["CORREOELECTRONICO"].ToString();
+            DdlAutor.SelectedValue = HfAutorId.Value + ".0";
+            TxtTitulo.Text = GvDatos.SelectedDataKey["TITULO"].ToString();
+            DateTime fechaAnio = Convert.ToDateTime(GvDatos.SelectedDataKey["ANO"].ToString());
+            TxtAnio.Text = fechaAnio.ToString("yyyy");            
+            TxtGenro.Text = GvDatos.SelectedDataKey["GENERO"].ToString();
+            TxtPaginas.Text = GvDatos.SelectedDataKey["NUMERO_PAGINAS"].ToString();
+
         }
 
         private void ActivarBotones()
         {
-            if (string.IsNullOrEmpty(HfAutorId.Value))
+            if (string.IsNullOrEmpty(HfLibroId.Value))
             {
                 BtnRegistrar.Visible = true;
                 BtnActualiza.Visible = false;
@@ -247,14 +233,14 @@ namespace WebVista.produccion.produccion.Administracion.Autor
         protected async void BtnActualiza_Click(object sender, EventArgs e)
         {
             var client = new HttpClient();
-            var url1 = url + "/" + HfAutorId.Value;
+            var url1 = url + "/" + HfLibroId.Value;
             var productos = JsonConvert.SerializeObject(Datos());
             bool datos = await autor.putAutores(url1, productos);
 
             if (datos)
             {
                 LimpiarTxt();
-                CargarAutores(url);
+                CargarLibros();
                 ShowMessage("Datos actualizados correctamente. ", MessageType.Informacion);
                 //CargarAutores();
                 
@@ -269,14 +255,14 @@ namespace WebVista.produccion.produccion.Administracion.Autor
         protected async void BtnEliminar_Click(object sender, EventArgs e)
         {
             var client = new HttpClient();
-            var url1 = url + "/" + HfAutorId.Value;
+            var url1 = url + "/" + HfLibroId.Value;
             var productos = JsonConvert.SerializeObject(Datos());
             bool datos = await autor.deleteAutores(url1);
 
             if (datos)
             {
                 LimpiarTxt();
-                CargarAutores(url);
+                CargarLibros();
                 ShowMessage("Registro eliminado correctamente. ", MessageType.Informacion);
                 //CargarAutores();
 
@@ -290,11 +276,8 @@ namespace WebVista.produccion.produccion.Administracion.Autor
 
         protected void DdlAutor_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var urlAutor = url + "/" + DdlAutor.Text;
-            CargarAutore(urlAutor);
+            //var hola = GvDatos.SelectedDataKey["ID_AUTOR"].ToString();
         }
-
-        
     }
 }
 

@@ -16,11 +16,11 @@ namespace WebApi01.Controllers
     public class AutoresController : ApiController
     {
         private Entities db = new Entities();
-
+       
         // GET: api/Autores
         public IQueryable<AUTOR> GetAUTORs()
         {
-            return db.AUTORs;
+           return db.AUTORs;
         }
 
         // GET: api/Autores/5

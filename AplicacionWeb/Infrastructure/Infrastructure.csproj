@@ -47,7 +47,6 @@
   <ItemGroup>
     <Compile Include="Autor\Autor.cs" />
     <Compile Include="Libro\Libro.cs" />
-    <Compile Include="Libro\LibroModelsApi.cs" />
     <Compile Include="Viaje\ViajeModelsApi.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Viaje\Viaje.cs" />

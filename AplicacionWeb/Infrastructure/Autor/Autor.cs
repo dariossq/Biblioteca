@@ -21,8 +21,8 @@ namespace Infrastructure.Autor
         
         public async Task<List<AutorModelsApi>> ListarAutores(string Datos)
         {
-            string respuesta = await getAutores(Datos);
-            List<AutorModelsApi> lst = JsonConvert.DeserializeObject<List<AutorModelsApi>>(respuesta);
+            object respuesta = await getAutores(Datos);
+            List<AutorModelsApi> lst = JsonConvert.DeserializeObject<List<AutorModelsApi>>(Convert.ToString(respuesta));
             return lst;
         }
         /// <summary>

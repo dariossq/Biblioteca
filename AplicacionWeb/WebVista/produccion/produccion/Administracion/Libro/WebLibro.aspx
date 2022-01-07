@@ -1,4 +1,4 @@
-﻿<%@ Page Async="true" Title="" Language="C#" MasterPageFile="~/produccion/masterPrincipal.Master" AutoEventWireup="true" CodeBehind="WebAutor.aspx.cs" Inherits="WebVista.produccion.produccion.Administracion.Autor.WebAutor" %>
+﻿<%@ Page Async="true" Title="" Language="C#" MasterPageFile="~/produccion/masterPrincipal.Master" AutoEventWireup="true" CodeBehind="WebLibro.aspx.cs" Inherits="WebVista.produccion.produccion.Administracion.Libro.WebLibro" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxtoolkit" %>
 
@@ -7,7 +7,8 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
     
     
-        <asp:HiddenField ID="HfAutorId" runat="server" />
+        <asp:HiddenField ID="HfLibroId" runat="server" />
+    <asp:HiddenField ID="HfAutorId" runat="server" />
        
      <asp:UpdatePanel ID="UpdatePanel2" runat="server">
         <ContentTemplate>
@@ -20,9 +21,7 @@
          <Triggers>
             <asp:PostBackTrigger ControlID="BtnActualiza" />
         </Triggers> 
-          <Triggers>
-            <asp:PostBackTrigger ControlID="BtnCancelar" />
-        </Triggers> 
+         
           <Triggers>
             <asp:PostBackTrigger ControlID="BtnEliminar" />
         </Triggers> 
@@ -30,7 +29,7 @@
    
 
         <div class="right_col" role="main">
-            <p>Autores registrados</p>
+            <p>Libros registrados</p>
             <div class="">
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12">
@@ -38,75 +37,77 @@
                             <div class="x_content">
                                 <div class="form-horizontal form-label-left">
                                     <div class="x_title">
-                                        <h2>Autores</h2>
+                                        <h2>Libro</h2>
                                         <ul class="nav navbar-right panel_toolbox">
                                             <li class="dropdown"></li>
                                         </ul>
                                         <div class="clearfix"></div>
                                     </div>
                                     <div class="item form-group">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Autor">
-                                            Nombre completo<span class="required">*</span>
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Libro">
+                                            Titulo<span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <asp:TextBox ID="TxtNombre" runat="server" class="form-control col-md-7 col-xs-12" MaxLength="50"
-                                                ToolTip="Nombre del Autor" placeholder="Wish" required="required"></asp:TextBox>
+                                            <asp:TextBox ID="TxtTitulo" runat="server" class="form-control col-md-7 col-xs-12" MaxLength="50"
+                                                ToolTip="Título del libro" placeholder="Wish" required="required"></asp:TextBox>
                                         </div>
                                     </div>
 
                                     <div class="item form-group">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Autor">
-                                            Fecha de Nacimiento<span class="required">*</span>
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Libro">
+                                            Año<span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
 
-                                            <asp:TextBox ID="TxtFechaNacimiento" runat="server" placeholder="dd/mm/yyyy" Format="dd/MM/yyyy" CssClass="form-control"
-                                                ToolTip="Fecha de nacimiento  (Dia/Mes/Año)"
+                                            <asp:TextBox ID="TxtAnio" runat="server" placeholder="yyyy" Format="yyyy" CssClass="form-control"
+                                                ToolTip="Año (Año)"
                                                 MaxLength="10"></asp:TextBox>
 
-                                            <ajaxtoolkit:CalendarExtender ID="CalendarExtender1" runat="server" TargetControlID="TxtFechaNacimiento"
-                                                Format="MM/dd/yyyy"></ajaxtoolkit:CalendarExtender>
+                                            <ajaxtoolkit:CalendarExtender ID="CalendarExtender1" runat="server" TargetControlID="TxtAnio"
+                                                Format="yyyy"></ajaxtoolkit:CalendarExtender>
                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server"
-                                                ControlToValidate="TxtFechaNacimiento" CssClass="mensaje" ErrorMessage="***" ForeColor="Red"
+                                                ControlToValidate="TxtAnio" CssClass="mensaje" ErrorMessage="***" ForeColor="Red"
                                                 ValidationGroup="GUARDAR">
                                             </asp:RequiredFieldValidator>
                                         </div>
                                     </div>
 
                                     <div class="item form-group">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Autor">
-                                            Ciudad de procedencia <span class="required">*</span>
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Libro">
+                                            Genero <span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <asp:TextBox ID="TxtCiudad" runat="server" class="form-control col-md-7 col-xs-12" MaxLength="50"
-                                                ToolTip="Ciudad" placeholder="Popa..." required="required"></asp:TextBox>
+                                            <asp:TextBox ID="TxtGenro" runat="server" class="form-control col-md-7 col-xs-12" MaxLength="50"
+                                                ToolTip="Genero" placeholder="Accion" required="required"></asp:TextBox>
                                         </div>
                                     </div>
 
                                     <div class="item form-group">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Autor">
-                                            Mail<span class="required">*</span>
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Libro">
+                                            Número de páginas<span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <asp:TextBox ID="TxtMail" runat="server" class="form-control col-md-7 col-xs-12" MaxLength="1000" ToolTip="ejemplo@..."
-                                                placeholder="ejemplo@..." required="required"></asp:TextBox>
+                                            <asp:TextBox ID="TxtPaginas" runat="server" class="form-control col-md-7 col-xs-12" MaxLength="1000" ToolTip="12"
+                                                placeholder="12" required="required"></asp:TextBox>
                                         </div>
                                     </div>
 
-                                    <div class="ln_solid"></div>
-
-                                    <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Autor">
-                                            Buscar Autor
+                                      <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Libro">
+                                            Autor<span class="required">*</span>
                                         </label>
-                                       
-                                        <div class="col-md-6 col-sm-6 col-xs-6">
-                                            <asp:DropDownList ID="DdlAutor" runat="server" AutoPostBack="true" AppendDataBoundItems="True" CssClass="form-control"
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                           
+                                        <asp:DropDownList ID="DdlAutor" runat="server" AutoPostBack="true" AppendDataBoundItems="True" CssClass="form-control"
                                             ToolTip="Lista de Autores" OnSelectedIndexChanged="DdlAutor_SelectedIndexChanged">
                                         </asp:DropDownList>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" CssClass="mensaje"
+                                            ErrorMessage="***" ControlToValidate="DdlAutor" ForeColor="Red"
+                                            ValidationGroup="GUARDAR">
+                                        </asp:RequiredFieldValidator>
+                                    </div>
                                        
-                                            </div>
-                                         
+
                                     </div>
 
                                     <div class="ln_solid"></div>
@@ -134,7 +135,7 @@
                         </div>
                         <div class="table-responsive">
                             <table id="datatable" class="table table-striped table-bordered">
-
+                                
                                 <asp:GridView ID="GvDatos" runat="server" Height="14px" Width="991px" Style="text-transform: uppercase"
                                     EmptyDataText=""
                                     HorizontalAlign="Center"
@@ -144,7 +145,7 @@
                                     PageSize="100" ShowFooter="True" ShowHeaderWhenEmpty="True"
                                     ViewStateMode="Enabled" UseAccessibleHeader="False"
                                     AutoGenerateColumns="False"
-                                    DataKeyNames="ID_AUTOR, NOMBRE_COMPLETO, FECHA_NACIMIENTO, CIUDAD_PROCEDENCIA, CORREOELECTRONICO"
+                                    DataKeyNames="ID_LIBRO, TITULO , ANO, GENERO , NUMERO_PAGINAS , ID_AUTOR"
                                     OnSelectedIndexChanged="GvDatos_SelectedIndexChanged">
                                     <AlternatingRowStyle BackColor="White" ForeColor="Black" Height="12px"
                                         Wrap="True" />
@@ -153,24 +154,25 @@
                                             SelectImageUrl="~/produccion/images/edit.png" ShowSelectButton="True">
                                             <ItemStyle Width="25px" />
                                         </asp:CommandField>
-                                        <asp:BoundField DataField="ID_AUTOR" HeaderText="ID_AUTOR"
-                                            Visible="false" />
-                                        <asp:BoundField DataField="NOMBRE_COMPLETO" HeaderText="Nombre completo">
+                                        <asp:BoundField DataField="ID_LIBRO" HeaderText="ID_LIBRO" Visible="true" />
+                                        <asp:BoundField DataField="ID_AUTOR" HeaderText="ID_AUTOR" Visible="true" />
+
+                                        <asp:BoundField DataField="TITULO" HeaderText="TITULO">
                                             <FooterStyle HorizontalAlign="Center" />
                                             <HeaderStyle HorizontalAlign="Center" />
                                             <ItemStyle HorizontalAlign="Left" />
                                         </asp:BoundField>
-                                        <asp:BoundField DataField="FECHA_NACIMIENTO" HeaderText="Fecha Nacimiento" DataFormatString="{0:d}">
+                                        <asp:BoundField DataField="ANO" HeaderText="Año" DataFormatString="{0:d}">
                                             <FooterStyle HorizontalAlign="Center" />
                                             <HeaderStyle HorizontalAlign="Center" />
                                             <ItemStyle HorizontalAlign="Left" />
                                         </asp:BoundField>
-                                        <asp:BoundField DataField="CIUDAD_PROCEDENCIA" HeaderText="Ciudad Procedencia">
+                                        <asp:BoundField DataField="GENERO" HeaderText="GENERO">
                                             <FooterStyle HorizontalAlign="Center" />
                                             <HeaderStyle HorizontalAlign="Center" />
                                             <ItemStyle HorizontalAlign="Left" />
                                         </asp:BoundField>
-                                        <asp:BoundField DataField="CORREOELECTRONICO" HeaderText="Mail">
+                                        <asp:BoundField DataField="NUMERO_PAGINAS" HeaderText="NUMERO_PAGINAS">
                                             <FooterStyle HorizontalAlign="Center" />
                                             <HeaderStyle HorizontalAlign="Center" />
                                             <ItemStyle HorizontalAlign="Left" />
@@ -190,6 +192,7 @@
                                     <SortedDescendingCellStyle BackColor="Black" />
                                     <SortedDescendingHeaderStyle BackColor="#4870BE" />
                                 </asp:GridView>
+                                                
                             </table>
                         </div>
                     </div>

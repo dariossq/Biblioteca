@@ -37,6 +37,18 @@ namespace WebVista.produccion.produccion.Administracion.ConsultaViaje
             {
                 CargarPersona();
                 //CargarVehiculo();
+                LlenarAño();
+            }
+        }
+
+        public void LlenarAño()
+        {
+            for (int i = DateTime.Now.Year - 20; i <= (DateTime.Now.Year + 20); i++)
+            {
+                ListItem lst = new ListItem();
+                lst.Value = i.ToString();
+                lst.Text = i.ToString();
+                DdlVehiculo.Items.Add(lst);
             }
         }
 
@@ -62,12 +74,12 @@ namespace WebVista.produccion.produccion.Administracion.ConsultaViaje
         /// </summary>
         public async void CargarPersona()
         {
-            DdlPersona.DataSource = null;
-            DdlPersona.Items.Add("");
-            DdlPersona.DataSource = await Personas.ListarAutores("Autores");
-            DdlPersona.DataTextField = "NOMBRE_COMPLETO";
-            DdlPersona.DataValueField = "ID_AUTOR";
-            DdlPersona.DataBind();
+            //DdlPersona.DataSource = null;
+            //DdlPersona.Items.Add("");
+            //DdlPersona.DataSource = await Personas.ListarAutores("Autores");
+            //DdlPersona.DataTextField = "NOMBRE_COMPLETO";
+            //DdlPersona.DataValueField = "ID_AUTOR";
+            //DdlPersona.DataBind();
         }
 
         /// <summary>
@@ -75,12 +87,12 @@ namespace WebVista.produccion.produccion.Administracion.ConsultaViaje
         /// </summary>
         public async void CargarVehiculo()
         {
-            DdlVehiculo.DataSource = null;
-            DdlVehiculo.Items.Add("");
-            DdlVehiculo.DataSource = await Vehiculo.ListarTodo("Vehiculos");
-            DdlVehiculo.DataTextField = "vehiculoPlaca";
-            DdlVehiculo.DataValueField = "vehiculoId";
-            DdlVehiculo.DataBind();
+            //DdlVehiculo.DataSource = null;
+            //DdlVehiculo.Items.Add("");
+            //DdlVehiculo.DataSource = await Vehiculo.ListarTodo("Vehiculos");
+            //DdlVehiculo.DataTextField = "vehiculoPlaca";
+            //DdlVehiculo.DataValueField = "vehiculoId";
+            //DdlVehiculo.DataBind();
         }       
 
         protected void BtnBuscarViajes_Click(object sender, EventArgs e)

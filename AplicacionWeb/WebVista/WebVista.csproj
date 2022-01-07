@@ -232,6 +232,8 @@
     <Content Include="produccion\package-lock.json" />
     <Content Include="produccion\package.json" />
     <Content Include="produccion\produccion\Administracion\Autor\WebAutor.aspx" />
+    <Content Include="produccion\produccion\Administracion\Buscar\WebBuscar.aspx" />
+    <Content Include="produccion\produccion\Administracion\Libro\WebLibro.aspx" />
     <Content Include="produccion\src\scss\custom.scss" />
     <Content Include="produccion\src\scss\daterangepicker.scss" />
     <Content Include="produccion\vendors\animate.css\.bower.json" />
@@ -4664,6 +4666,20 @@
     </Compile>
     <Compile Include="produccion\produccion\Administracion\Autor\WebAutor.aspx.designer.cs">
       <DependentUpon>WebAutor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="produccion\produccion\Administracion\Buscar\WebBuscar.aspx.cs">
+      <DependentUpon>WebBuscar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="produccion\produccion\Administracion\Buscar\WebBuscar.aspx.designer.cs">
+      <DependentUpon>WebBuscar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="produccion\produccion\Administracion\Libro\WebLibro.aspx.cs">
+      <DependentUpon>WebLibro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="produccion\produccion\Administracion\Libro\WebLibro.aspx.designer.cs">
+      <DependentUpon>WebLibro.aspx</DependentUpon>
     </Compile>
     <Compile Include="produccion\produccion\Administracion\Principal\WebPrincipal.aspx.cs">
       <DependentUpon>WebPrincipal.aspx</DependentUpon>

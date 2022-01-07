@@ -8,7 +8,7 @@ namespace ReRopository.AutorRepository
 {
    public class AutorModelsApi
     {
-        public decimal ID_AUTOR { get; set; }
+        public string ID_AUTOR { get; set; }
         public string NOMBRE_COMPLETO { get; set; }
         public Nullable<System.DateTime> FECHA_NACIMIENTO { get; set; }
         public string CIUDAD_PROCEDENCIA { get; set; }
