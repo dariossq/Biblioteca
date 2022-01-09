@@ -47,12 +47,12 @@ namespace WebVista.produccion.produccion.Administracion.Autor
             {
                 DdlAutor.DataSource = null;
                 DdlAutor.Items.Add("");
-                DdlAutor.DataSource = await autor.ListarAutores(url);
+                DdlAutor.DataSource = await autor.getAutores(url);
                 DdlAutor.DataTextField = "NOMBRE_COMPLETO";
                 DdlAutor.DataValueField = "ID_AUTOR";
                 DdlAutor.DataBind();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;
@@ -92,10 +92,15 @@ namespace WebVista.produccion.produccion.Administracion.Autor
 
         //}
 
+
+
+
         private async void CargarAutore(string urlEntrada)
         {
             try
             {
+
+
                 urlEntrada = urlEntrada.Remove(urlEntrada.Length - 2);
                 string datos = "{'Table1': [ " +  await autor.getAutores(urlEntrada) + " ]}";
                 DataSet dataSet1 = JsonConvert.DeserializeObject<DataSet>(datos);

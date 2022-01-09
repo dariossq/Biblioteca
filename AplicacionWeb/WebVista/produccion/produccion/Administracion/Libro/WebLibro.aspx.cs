@@ -17,9 +17,10 @@ namespace WebVista.produccion.produccion.Administracion.Libro
     public partial class WebLibro : System.Web.UI.Page
     {
         Infrastructure.Autor.Autor autor = new Infrastructure.Autor.Autor();
+        Infrastructure.Libro.Libro libro = new Infrastructure.Libro.Libro();
         DataSet Ds = new DataSet();
         dynamic Biblioteca = new System.Dynamic.ExpandoObject();
-        string url = ConfigurationManager.AppSettings["ApiLibro"];
+        string urlLibro = ConfigurationManager.AppSettings["ApiLibro"];
         string urlAutor = ConfigurationManager.AppSettings["ApiAutor"];
 
         public enum MessageType { Mensaje, Error, Informacion, Advertencia };
@@ -37,7 +38,25 @@ namespace WebVista.produccion.produccion.Administracion.Libro
             {
                 CargarAutor();
                 CargarLibros();
-               
+                CargarLibro(); 
+            }
+        }
+
+        public async void CargarLibro()
+        {
+            try
+            {
+                
+                DdlLibro.DataSource = null;
+                DdlLibro.Items.Add("");
+                DdlLibro.DataSource = await libro.ListarLibros(urlLibro);
+                DdlLibro.DataTextField = "TITULO";
+                DdlLibro.DataValueField = "ID_LIBRO";
+                DdlLibro.DataBind();
+            }
+            catch (Exception ex)
+            {
+              throw;
             }
         }
 
@@ -54,7 +73,6 @@ namespace WebVista.produccion.produccion.Administracion.Libro
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -65,8 +83,8 @@ namespace WebVista.produccion.produccion.Administracion.Libro
         private async void CargarLibros()
         {
             try
-            {
-                string datos = await autor.getAutores(url);
+            {               
+                string datos = await libro.getLibro(urlLibro);
                 var definicion = new { ID_LIBRO = 0.0, TITULO = "", ANO = "", GENERO = "", NUMERO_PAGINAS = "" , ID_AUTOR = 0.0 };
                 //var definicion = new CargarDefinicion();
                 var listaDefinicion = new[] { definicion };
@@ -82,7 +100,6 @@ namespace WebVista.produccion.produccion.Administracion.Libro
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -115,7 +132,7 @@ namespace WebVista.produccion.produccion.Administracion.Libro
                 }
                 else
                 {
-                    Biblioteca.ANO = "12/12/12";
+                    Biblioteca.ANO = "01/" + TxtAnio.Text + "/01";
                 }
 
                 if (string.IsNullOrEmpty(TxtGenro.Text))
@@ -136,13 +153,13 @@ namespace WebVista.produccion.produccion.Administracion.Libro
                     Biblioteca.NUMERO_PAGINAS = TxtPaginas.Text;
                 }
 
-                if (string.IsNullOrEmpty(HfAutorId.Value))
+                if (string.IsNullOrEmpty(DdlAutor.Text))
                 {
-                    Biblioteca.ID_AUTOR = 1;
+                    Biblioteca.ID_AUTOR = 0;
                 }
                 else
                 {
-                    Biblioteca.ID_AUTOR = 1;
+                    Biblioteca.ID_AUTOR = DdlAutor.Text;
                 }
 
                 return Biblioteca;
@@ -157,7 +174,7 @@ namespace WebVista.produccion.produccion.Administracion.Libro
         {
             var client = new HttpClient();
             var productos = JsonConvert.SerializeObject(Datos());
-            string datos = await autor.postAutores(url, productos);
+            string datos = await libro.postLibros(urlLibro, productos);
 
             if (string.IsNullOrEmpty(datos))
             {
@@ -233,39 +250,35 @@ namespace WebVista.produccion.produccion.Administracion.Libro
         protected async void BtnActualiza_Click(object sender, EventArgs e)
         {
             var client = new HttpClient();
-            var url1 = url + "/" + HfLibroId.Value;
+            var url1 = urlLibro + "/" + HfLibroId.Value;
             var productos = JsonConvert.SerializeObject(Datos());
-            bool datos = await autor.putAutores(url1, productos);
+            bool datos = await libro.putLibros(url1, productos);
 
             if (datos)
             {
                 LimpiarTxt();
                 CargarLibros();
-                ShowMessage("Datos actualizados correctamente. ", MessageType.Informacion);
-                //CargarAutores();
-                
+                ShowMessage("Datos actualizados correctamente. ", MessageType.Informacion);                                
             }
             else
             {
                 ShowMessage("Lo sentimos no se ha podigo actualizar la información. ", MessageType.Informacion);
-
-            }
+             }
         }
 
         protected async void BtnEliminar_Click(object sender, EventArgs e)
         {
-            var client = new HttpClient();
-            var url1 = url + "/" + HfLibroId.Value;
-            var productos = JsonConvert.SerializeObject(Datos());
-            bool datos = await autor.deleteAutores(url1);
+           // var client = new HttpClient();
+            var url1 = urlLibro + "/" + HfLibroId.Value;
+            //var productos = JsonConvert.SerializeObject(Datos());
+            bool datos = await libro.deleteLibros(url1);
 
             if (datos)
             {
                 LimpiarTxt();
                 CargarLibros();
                 ShowMessage("Registro eliminado correctamente. ", MessageType.Informacion);
-                //CargarAutores();
-
+               
             }
             else
             {
@@ -274,10 +287,33 @@ namespace WebVista.produccion.produccion.Administracion.Libro
             }
         }
 
-        protected void DdlAutor_SelectedIndexChanged(object sender, EventArgs e)
+        protected void DdlLibro_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //var hola = GvDatos.SelectedDataKey["ID_AUTOR"].ToString();
+            var urlLibroo = urlLibro + "/" + DdlLibro.Text;
+            CargarLibro(urlLibroo);
         }
+
+        private async void CargarLibro(string urlEntrada)
+        {
+            try
+            {
+                urlEntrada = urlEntrada.Remove(urlEntrada.Length - 2);
+                string datos = "{'Table1': [ " + await libro.getLibro(urlEntrada) + " ]}";
+                DataSet dataSet1 = JsonConvert.DeserializeObject<DataSet>(datos);
+                GvDatos.DataSource = dataSet1;
+                GvDatos.DataBind();
+
+                if (GvDatos.Rows.Count <= 0)
+                {
+                    ShowMessage("No hay datos con la información suministrada. ", MessageType.Informacion);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
     }
 }
 

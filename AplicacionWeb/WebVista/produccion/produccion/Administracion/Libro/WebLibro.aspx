@@ -99,7 +99,7 @@
                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                            
                                         <asp:DropDownList ID="DdlAutor" runat="server" AutoPostBack="true" AppendDataBoundItems="True" CssClass="form-control"
-                                            ToolTip="Lista de Autores" OnSelectedIndexChanged="DdlAutor_SelectedIndexChanged">
+                                            ToolTip="Lista de Autores" >
                                         </asp:DropDownList>
                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" CssClass="mensaje"
                                             ErrorMessage="***" ControlToValidate="DdlAutor" ForeColor="Red"
@@ -108,6 +108,25 @@
                                     </div>
                                        
 
+
+
+
+                                    </div>
+                                    <div class="item form-group">     
+    <div class="ln_solid"></div>
+
+                                    <div class="item form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Autor">
+                                            Buscar Libro
+                                        </label>
+                                       
+                                        <div class="col-md-6 col-sm-6 col-xs-6">
+                                            <asp:DropDownList ID="DdlLibro" runat="server" AutoPostBack="true" AppendDataBoundItems="True" CssClass="form-control"
+                                            ToolTip="Lista de Libros" OnSelectedIndexChanged="DdlLibro_SelectedIndexChanged">
+                                        </asp:DropDownList>
+                                       
+                                            </div>
+                                         </div>
                                     </div>
 
                                     <div class="ln_solid"></div>
